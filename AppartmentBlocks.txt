@@ -1,0 +1,76 @@
+let blocks = [
+{
+    "gym": false,
+    "school": true,
+    "store": false,
+},
+{
+    "gym": true,
+    "school": false,
+    "store": false,
+},
+{
+    "gym": true,
+    "school": true,
+    "store": false,
+},
+{
+    "gym": false,
+    "school": true,
+    "store": false,
+},
+{
+"gym": false,
+"school": true,
+"store": true,
+}
+]
+const reqs = ["gym", "school", "store"];
+var apartmentIndex=0;
+var finalOutput = []
+function apartmentHunting(blocks, reqs) {
+    //stroing index in blocks for each block in the form of key-value pair
+    blocks=Object.entries(blocks);
+    //for loop for storing null values in each block 
+    for(let j=0;j<blocks.length;j++)
+        {
+            //storing null values in each block
+            finalOutput[j]={
+                "gym": null,
+                "school": null,
+                "store": null,
+            }
+        }
+    for(let i=0; i<reqs.length;i++){
+        for(let j=0;j<blocks.length;j++)
+        {
+            //declaring count variable for storing value of blocks length 
+          let count=j;
+        //   console.log("block",blocks[j][1][reqs[i]]);
+          //checking in each blocks if request is true
+          //example checking in block where Gym is true, School is true & Store is true
+            if(blocks[j][1][reqs[i]]==true)
+            {
+                //if value for block is true then storing value in finalOutput as 0
+                            finalOutput[j][reqs[i]]=0;
+            }
+            else{
+                count++;
+                //running while loop till the length of blocks
+                while(count<blocks.length)
+                {
+                    //if  block is found
+                    if(blocks[count][1][reqs[i]]==true)
+                    {
+                    finalOutput[j][reqs[i]]=count;
+                    break;
+                    }
+                    //else increment the count
+                    count++;
+                }
+            }
+        }
+    }
+    console.log(finalOutput)
+}
+apartmentHunting(blocks, reqs);
